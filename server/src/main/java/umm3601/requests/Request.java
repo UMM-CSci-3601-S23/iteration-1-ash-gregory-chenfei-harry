@@ -3,13 +3,14 @@ package umm3601.requests;
 import org.mongojack.Id;
 import org.mongojack.ObjectId;
 
+@SuppressWarnings({"VisibilityModifier", "MemberName"})
 public class Request {
   @ObjectId @Id
 
-  @SuppressWarnings({"VisibilityModifier"})
   public String _id;
 
-  // See https://github.com/UMM-CSci-3601-S23/iteration-1-ash-gregory-chenfei-harry/issues/15#issuecomment-1448698307 for details
+  // See https://github.com/UMM-CSci-3601-S23/iteration-1-ash-gregory-chenfei-harry/issues/15#issuecomment-1448698307
+  // or docs/server/requests.md for details
   public String name;
   public String category;
   public String unit;
@@ -30,5 +31,14 @@ public class Request {
     }
     Request other = (Request) obj;
     return _id.equals(other._id);
+  }
+
+  /*
+   * Implement the `hashCode` method for `Request`s
+   */
+  @Override
+  public int hashCode() {
+    // This means that equal `Requests` will hash the same, which is good.
+    return _id.hashCode();
   }
 }

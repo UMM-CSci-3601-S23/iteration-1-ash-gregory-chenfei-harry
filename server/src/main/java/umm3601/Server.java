@@ -79,6 +79,10 @@ public class Server {
     // List requests
     server.get("/api/requests", requestController::getRequests);
 
+    // Add new request with the request info being in the JSON
+    // body of the HTTP request
+    server.post("/api/requests", requestController::addNewRequest);
+
     // This catches any uncaught exceptions thrown in the server
     // code and turns them into a 500 response ("Internal Server
     // Error Response"). In general you'll like to *never* actually

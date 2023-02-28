@@ -1,16 +1,22 @@
 package umm3601.requests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static com.mongodb.client.model.Filters.eq;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,6 +35,9 @@ import com.mongodb.client.MongoDatabase;
 
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
+import io.javalin.json.JavalinJackson;
+import io.javalin.validation.BodyValidator;
+import io.javalin.validation.ValidationException;
 
 @SuppressWarnings({ "MagicNumber" })
 public class RequestControllerSpec {
@@ -41,6 +50,9 @@ public class RequestControllerSpec {
   private static MongoClient mongoClient;
   private static MongoDatabase db;
 
+  // Used to translate between JSON and POJOs.
+  private static JavalinJackson javalinJackson = new JavalinJackson();
+
   // The mocked javalin context
   @Mock
   private Context ctx;
@@ -48,6 +60,10 @@ public class RequestControllerSpec {
   // Captures the `ArrayList` of `Request`s returned by some endpoints
   @Captor
   private ArgumentCaptor<ArrayList<Request>> requestArrayListCaptor;
+
+  // Captures a `Map` received from the `RequestController`
+  @Captor
+  private ArgumentCaptor<Map<String, String>> mapCaptor;
 
   /*
    * Setup that is run once before all of the tests are run, specifically, this
@@ -133,5 +149,157 @@ public class RequestControllerSpec {
 
     // Make sure the number of elements in the database is the same as the number of elements returned
     assertEquals(db.getCollection("requests").countDocuments(), requestArrayListCaptor.getValue().size());
+  }
+
+  @Test
+  void canAddRequest() throws IOException {
+    // String for the json representing a potential new `Request`
+    String testNewRequest = "{"
+    + "  \"name\": \"Cereal\","
+    + "  \"category\": \"grains\","
+    + "  \"unit\": \"boxes\","
+    + "  \"count\": 6,"
+    + "  \"price\": 3.50,"
+    + "  \"priority\": 5"
+    + "}";
+
+    when(ctx.bodyValidator(Request.class))
+      .then(value -> new BodyValidator<Request>(testNewRequest, Request.class, javalinJackson));
+
+    requestController.addNewRequest(ctx);
+    verify(ctx).json(mapCaptor.capture());
+
+    // Our status should be 201, i.e., our new request was successfully created.
+    verify(ctx).status(HttpStatus.CREATED);
+
+    // Verify that the request was added to the database with the correct ID
+    Document addedRequest = db.getCollection("requests")
+      .find(eq("_id", new ObjectId(mapCaptor.getValue().get("id")))).first();
+
+    // Successfully adding the request should return the newly generated, non-empty MongoDB ID for that request.
+    assertNotEquals("", addedRequest.get("_id"));
+    assertEquals("Cereal", addedRequest.get("name"));
+    assertEquals(5, addedRequest.get("priority"));
+    assertEquals(3.50, addedRequest.get("price"));
+    assertEquals("grains", addedRequest.get("category"));
+    assertEquals("boxes", addedRequest.get("unit"));
+    assertEquals(6, addedRequest.get("count"));
+    assertEquals(6, addedRequest.get("count_remaining"));
+    assertNotNull(addedRequest.get("date_added"));
+    assertNotNull(addedRequest.get("date_updated"));
+  }
+
+  @Test
+  void throwsErrorWhenAddBadName() throws IOException {
+    String testNewRequest = "{"
+    + "  \"name\": \"\","
+    + "  \"category\": \"grains\","
+    + "  \"unit\": \"boxes\","
+    + "  \"count\": 6,"
+    + "  \"price\": 3.50,"
+    + "  \"priority\": 5"
+    + "}";
+
+    when(ctx.bodyValidator(Request.class))
+      .then(value -> new BodyValidator<Request>(testNewRequest, Request.class, javalinJackson));
+
+    assertThrows(ValidationException.class, () -> {
+      requestController.addNewRequest(ctx);
+    });
+  }
+
+  @Test
+  void throwsErrorWhenAddBadCategory() throws IOException {
+    String testNewRequest = "{"
+    + "  \"name\": \"Cereal\","
+    + "  \"category\": \"whole grains\","
+    + "  \"unit\": \"boxes\","
+    + "  \"count\": 6,"
+    + "  \"price\": 3.50,"
+    + "  \"priority\": 5"
+    + "}";
+
+    when(ctx.bodyValidator(Request.class))
+      .then(value -> new BodyValidator<Request>(testNewRequest, Request.class, javalinJackson));
+
+    assertThrows(ValidationException.class, () -> {
+      requestController.addNewRequest(ctx);
+    });
+  }
+
+  @Test
+  void throwsErrorWhenAddBadUnit() throws IOException {
+    String testNewRequest = "{"
+    + "  \"name\": \"Cereal\","
+    + "  \"category\": \"grains\","
+    + "  \"unit\": \"\","
+    + "  \"count\": 6,"
+    + "  \"price\": 3.50,"
+    + "  \"priority\": 5"
+    + "}";
+
+    when(ctx.bodyValidator(Request.class))
+      .then(value -> new BodyValidator<Request>(testNewRequest, Request.class, javalinJackson));
+
+    assertThrows(ValidationException.class, () -> {
+      requestController.addNewRequest(ctx);
+    });
+  }
+
+  @Test
+  void throwsErrorWhenAddBadCount() throws IOException {
+    String testNewRequest = "{"
+    + "  \"name\": \"Cereal\","
+    + "  \"category\": \"grains\","
+    + "  \"unit\": \"boxes\","
+    + "  \"count\": 0,"
+    + "  \"price\": 3.50,"
+    + "  \"priority\": 5"
+    + "}";
+
+    when(ctx.bodyValidator(Request.class))
+      .then(value -> new BodyValidator<Request>(testNewRequest, Request.class, javalinJackson));
+
+    assertThrows(ValidationException.class, () -> {
+      requestController.addNewRequest(ctx);
+    });
+  }
+
+  @Test
+  void throwsErrorWhenAddBadPrice() throws IOException {
+    String testNewRequest = "{"
+    + "  \"name\": \"Cereal\","
+    + "  \"category\": \"grains\","
+    + "  \"unit\": \"boxes\","
+    + "  \"count\": 6,"
+    + "  \"price\": NaN,"
+    + "  \"priority\": 5"
+    + "}";
+
+    when(ctx.bodyValidator(Request.class))
+      .then(value -> new BodyValidator<Request>(testNewRequest, Request.class, javalinJackson));
+
+    assertThrows(ValidationException.class, () -> {
+      requestController.addNewRequest(ctx);
+    });
+  }
+
+  @Test
+  void throwsErrorWhenAddBadPriority() throws IOException {
+    String testNewRequest = "{"
+    + "  \"name\": \"Cereal\","
+    + "  \"category\": \"grains\","
+    + "  \"unit\": \"boxes\","
+    + "  \"count\": 6,"
+    + "  \"price\": 3.50,"
+    + "  \"priority\": -1"
+    + "}";
+
+    when(ctx.bodyValidator(Request.class))
+      .then(value -> new BodyValidator<Request>(testNewRequest, Request.class, javalinJackson));
+
+    assertThrows(ValidationException.class, () -> {
+      requestController.addNewRequest(ctx);
+    });
   }
 }

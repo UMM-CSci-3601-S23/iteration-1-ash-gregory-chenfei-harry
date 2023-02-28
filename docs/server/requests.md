@@ -40,4 +40,34 @@ These are represented as the `Requests` object on the server. The class can be f
 
 ## API Endpoints
 
-The endpoint to retrieve all of the requests stored in the database is `/api/requests`.
+### Retrieve Requests
+
+The endpoint to retrieve all of the requests stored in the database is `/api/requests` with an HTTP GET request. On success a `200 OK` status is returned.
+
+### Add new Request
+
+The endpoint to add a new request to the database is `/api/requests` with an HTTP POST request. On success a `201 CREATED` status is returned, along with a json object containing the `id` of the new request.
+
+The body of this request must be a JSON object providing the required data. This object should resemble the following:
+
+```json
+{
+  "name": "Cereal",
+  "category": "grains",
+  "unit": "boxes",
+  "count": 6,
+  "price": 3.50,
+  "priority": 5
+}
+```
+
+The following restrictions are placed on the data provided:
+
+- `name` must be present and non-empty
+- `category` must be present, non-empty and be a single word (i.e not contain any spaces)
+- `unit` must be present and be non-empty
+- `count` must be present and a positive integer
+- `price` must be present and greater than zero
+- `priority` must be present and a positive integer
+
+Note that the `count_remaining` value in the request will be be initialized with the `count` provided. The `date_added` and `date_updated` values are both updated with the current time formatted as an ISO 8601 string.

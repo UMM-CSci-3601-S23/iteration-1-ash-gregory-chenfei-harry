@@ -55,11 +55,13 @@ public class RequestController {
   public void addNewRequest(Context ctx) {
     // Extract the information to form the new request from the context
     Request request = ctx.bodyValidator(Request.class)
-      .check(rq -> rq.name != null && rq.name.length() > 0, "Request must have a non-empty item name")
-      .check(rq -> rq.category != null && rq.category.length() > 0 && !rq.category.contains(" "), "Request context must be formatted as a single word")
+      .check(rq -> rq.name != null && rq.name.length() > 0,
+        "Request must have a non-empty item name")
+      .check(rq -> rq.category != null && rq.category.length() > 0 && !rq.category.contains(" "),
+        "Request category must be formatted as a single word")
       .check(rq -> rq.unit != null && rq.unit.length() > 0, "Request unit must be a non-empty")
       .check(rq -> rq.count > 0, "Request count must be greater than zero")
-      .check(rq -> rq.price > 0, "Request count must be greater than zero")
+      .check(rq -> rq.price > 0.0, "Request price must be greater than zero")
       .check(rq -> rq.priority > 0, "Request priority must be a positive integer")
       .get();
 
@@ -68,7 +70,7 @@ public class RequestController {
 
     // The initial `date_added` and `date_updated` are set to the current time
     // formatted as an ISO 8601 string
-    request.date_added = ZonedDateTime.now( ZoneOffset.UTC ).format( DateTimeFormatter.ISO_INSTANT );
+    request.date_added = ZonedDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_INSTANT);
     request.date_updated = request.date_added;
 
     // Insert the request into the database

@@ -32,7 +32,7 @@ The price is a rough estimate of the price of one unit of the item in question. 
 
 The priority is a number used to give a rough way for volunteers to order the requests by importance. Smaller numbers mean more highly prioritized.
 
-Date added is the date the request was initially made, and date updated is the date the entry was last updated (for example an edit was made, or someone pledged to bring in some amount of the given item).
+Date added is the date the request was initially made, and date updated is the date the entry was last updated (for example an edit was made, or someone pledged to bring in some amount of the given item). Both dates are for the time being represented as a string conforming to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
 
 Count remaining is also used for the potential to have "pledges" update the amount requested that appears to donors.
 

@@ -13,6 +13,7 @@ import org.bson.UuidRepresentation;
 import io.javalin.Javalin;
 import io.javalin.plugin.bundled.RouteOverviewPlugin;
 import io.javalin.http.InternalServerErrorResponse;
+import umm3601.requests.RequestController;
 import umm3601.user.UserController;
 
 public class Server {
@@ -42,6 +43,7 @@ public class Server {
 
     // Initialize dependencies
     UserController userController = new UserController(database);
+    RequestController requestController = new RequestController(database);
 
     Javalin server = Javalin.create(config ->
       config.plugins.register(new RouteOverviewPlugin("/api"))
@@ -74,6 +76,13 @@ public class Server {
     // of the HTTP request
     server.post("/api/users", userController::addNewUser);
 
+    // List requests
+    server.get("/api/requests", requestController::getRequests);
+
+    // Add new request with the request info being in the JSON
+    // body of the HTTP request
+    server.post("/api/requests", requestController::addNewRequest);
+
     // This catches any uncaught exceptions thrown in the server
     // code and turns them into a 500 response ("Internal Server
     // Error Response"). In general you'll like to *never* actually
@@ -84,7 +93,8 @@ public class Server {
     // caught here so you'd know about them and could try to address
     // them.
     server.exception(Exception.class, (e, ctx) -> {
-      throw new InternalServerErrorResponse(e.toString());
+      e.printStackTrace();
+      throw new InternalServerErrorResponse(e.toString() + "\n\n");
     });
   }
 }

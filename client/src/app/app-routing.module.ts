@@ -5,6 +5,7 @@ import { UserListComponent } from './users/user-list.component';
 import { UserProfileComponent } from './users/user-profile.component';
 import { AddUserComponent } from './users/add-user.component';
 import { ItemCardComponent } from './items/item-card.component';
+import { VolunteerPageComponent } from './volunteer-page/volunteer-page.component';
 
 // Note that the 'users/new' route needs to come before 'users/:id'.
 // If 'users/:id' came first, it would accidentally catch requests to
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'users', component: UserListComponent, title: 'Users'},
   {path: 'users/new', component: AddUserComponent, title: 'Add User'},
   {path: 'users/:id', component: UserProfileComponent, title: 'User Profile'},
-  {path: 'items', component: ItemCardComponent, title: 'Items'}
+  {path: 'items', component: ItemCardComponent, title: 'Items'},
+  {path: 'volunteer', component: VolunteerPageComponent, title: 'Volunteer View'}
 ];
 
 @NgModule({

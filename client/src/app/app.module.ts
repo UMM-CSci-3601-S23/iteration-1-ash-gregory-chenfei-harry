@@ -32,6 +32,7 @@ import { UserListComponent } from './users/user-list.component';
 import { UserProfileComponent } from './users/user-profile.component';
 import { ItemCardComponent } from './items/item-card.component';
 import { ItemListComponent } from './items/item-list/item-list.component';
+import { VolunteerPageComponent } from './volunteer-page/volunteer-page.component';
 
 const MATERIAL_MODULES: any[] = [
   MatButtonModule,
@@ -62,6 +63,7 @@ const MATERIAL_MODULES: any[] = [
     AddUserComponent,
     ItemCardComponent,
     ItemListComponent,
+    VolunteerPageComponent,
   ],
   imports: [
     BrowserModule,

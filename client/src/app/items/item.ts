@@ -10,7 +10,7 @@ export interface Item {
   date_added: string;
   date_updated: string;
   count_remaining: number;
-
 }
 
-export type FoodCategory = 'dairy' | 'fruit' | 'canned goods';
+export type FoodCategory = 'fruits' | 'vegetables' | 'proteins' | 'grains' | 'dairy' |
+                           'pantry' | 'baby' | 'personal' | 'household' | 'misc';

@@ -30,7 +30,8 @@ import { HomeComponent } from './home/home.component';
 import { UserCardComponent } from './users/user-card.component';
 import { UserListComponent } from './users/user-list.component';
 import { UserProfileComponent } from './users/user-profile.component';
-import { ItemCardComponent } from './item-card/item-card.component';
+import { ItemCardComponent } from './items/item-card.component';
+import { ItemListComponent } from './items/item-list/item-list.component';
 
 const MATERIAL_MODULES: any[] = [
   MatButtonModule,
@@ -60,6 +61,7 @@ const MATERIAL_MODULES: any[] = [
     UserProfileComponent,
     AddUserComponent,
     ItemCardComponent,
+    ItemListComponent,
   ],
   imports: [
     BrowserModule,

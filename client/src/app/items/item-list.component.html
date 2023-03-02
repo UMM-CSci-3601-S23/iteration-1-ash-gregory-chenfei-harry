@@ -1,0 +1,31 @@
+<div class="flex-row">
+  <div class="flex-1" *ngIf="serverFilteredItems; else itemsError" >
+
+      <!-- List view -->
+        <mat-card-content>
+          <mat-nav-list class="item-nav-list">
+            <h3 mat-subheader>Items</h3>
+            <a mat-list-item *ngFor="let item of this.filteredItems" [routerLink]="['/items', item._id]" class="item-list-item">
+              <!--img matListItemAvatar [src]="item.avatar" *ngIf="this.item.avatar"-->
+              <span matListItemTitle mat-line class="item-list-name"> {{item.name}} </span>
+              <span matListItemLine class="item-list-category"> {{item.category}} </span>
+            </a>
+          </mat-nav-list>
+        </mat-card-content>
+
+  </div>
+
+  <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
+  <ng-template #itemsError>
+    <div class="flex-1" class="item-error">
+      <mat-error>
+        There was a problem loading the items. Possibly the server is down or perhaps there are network
+        issues.
+      </mat-error>
+      <mat-error>
+        Please wait a bit and try again or start the server.
+      </mat-error>
+    </div>
+  </ng-template>
+
+</div>

@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/naming-convention: "off" */
 export interface Item {
   _id: string;
   name: string;

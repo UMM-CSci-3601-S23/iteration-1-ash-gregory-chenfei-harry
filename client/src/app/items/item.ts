@@ -11,5 +11,4 @@ export interface Item {
   count_remaining: number;
 
 }
-
 export type FoodCategory = 'dairy' | 'fruit' | 'canned goods';

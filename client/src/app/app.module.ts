@@ -31,7 +31,7 @@ import { UserCardComponent } from './users/user-card.component';
 import { UserListComponent } from './users/user-list.component';
 import { UserProfileComponent } from './users/user-profile.component';
 import { ItemCardComponent } from './items/item-card.component';
-import { ItemListComponent } from './items/item-list/item-list.component';
+import { ItemListComponent } from './items/item-list.component';
 
 const MATERIAL_MODULES: any[] = [
   MatButtonModule,

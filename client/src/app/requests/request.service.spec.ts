@@ -2,18 +2,18 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { Item } from './item';
+import { Request } from './request';
 
 import { RequestService } from './request.service';
 
-describe('ItemService', () => {
+describe('RequestService', () => {
   /* eslint @typescript-eslint/naming-convention: 'off' */
-  const testItems: Item[] = [
+  const testRequests: Request[] = [
     {
       _id: '588935f5556f992bf8f37c01',
       name: 'Apples',
       category: 'fruits',
-      unit: 'item',
+      unit: 'request',
       count: 32,
       price: 10.23,
       priority: 2,
@@ -34,7 +34,7 @@ describe('ItemService', () => {
       count_remaining: 20}
   ];
 
-  let itemService: ItemService;
+  let requestService: RequestService;
 
   // These are used to mock the HTTP requests so that we (a) don't have to
   // have the server running and (b) we can check exactly which HTTP
@@ -51,7 +51,7 @@ describe('ItemService', () => {
     // HTTP client.
     httpClient = TestBed.inject(HttpClient);
     httpTestingController = TestBed.inject(HttpTestingController);
-    itemService = new ItemService(httpClient);
+    requestService = new RequestService(httpClient);
   });
 
   afterEach(() => {
@@ -63,15 +63,15 @@ describe('ItemService', () => {
     it('calls `api/requests`', waitForAsync(() => {
       // Mock the `httpClient.get()` method, so that instead of making an HTTP request,
       // it just returns our test data.
-      const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(testItems));
+      const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(testRequests));
 
-      itemService.getItems().subscribe(() => {
+      requestService.getRequests().subscribe(() => {
         expect(mockedMethod)
           .withContext('one call')
           .toHaveBeenCalledTimes(1);
         expect(mockedMethod)
           .withContext('talks to the correct endpoint')
-          .toHaveBeenCalledWith(itemService.itemUrl, { params: new HttpParams() });
+          .toHaveBeenCalledWith(requestService.requestUrl, { params: new HttpParams() });
       });
     }));
   });
@@ -80,45 +80,45 @@ describe('ItemService', () => {
     it('calls `api/requests with the right arguments for category`', waitForAsync(() => {
       // Mock the `httpClient.get()` method, so that instead of making an HTTP request,
       // it just returns our test data.
-      const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(testItems));
+      const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(testRequests));
 
-      itemService.getItems({category: 'fruits'}).subscribe(() => {
+      requestService.getRequests({category: 'fruits'}).subscribe(() => {
         expect(mockedMethod)
           .withContext('one call')
           .toHaveBeenCalledTimes(1);
         expect(mockedMethod)
           .withContext('talks to the correct endpoint')
-          .toHaveBeenCalledWith(itemService.itemUrl, { params: new HttpParams().set('category', 'fruits') });
+          .toHaveBeenCalledWith(requestService.requestUrl, { params: new HttpParams().set('category', 'fruits') });
       });
     }));
 
     it('calls `api/requests with the right arguments for count`', waitForAsync(() => {
       // Mock the `httpClient.get()` method, so that instead of making an HTTP request,
       // it just returns our test data.
-      const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(testItems));
+      const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(testRequests));
 
-      itemService.getItems({count: 4}).subscribe(() => {
+      requestService.getRequests({count: 4}).subscribe(() => {
         expect(mockedMethod)
           .withContext('one call')
           .toHaveBeenCalledTimes(1);
         expect(mockedMethod)
           .withContext('talks to the correct endpoint')
-          .toHaveBeenCalledWith(itemService.itemUrl, { params: new HttpParams().set('count', '4') });
+          .toHaveBeenCalledWith(requestService.requestUrl, { params: new HttpParams().set('count', '4') });
       });
     }));
 
     it('calls `api/requests with the right arguments for unit`', waitForAsync(() => {
       // Mock the `httpClient.get()` method, so that instead of making an HTTP request,
       // it just returns our test data.
-      const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(testItems));
+      const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(testRequests));
 
-      itemService.getItems({unit: 'boxes'}).subscribe(() => {
+      requestService.getRequests({unit: 'boxes'}).subscribe(() => {
         expect(mockedMethod)
           .withContext('one call')
           .toHaveBeenCalledTimes(1);
         expect(mockedMethod)
           .withContext('talks to the correct endpoint')
-          .toHaveBeenCalledWith(itemService.itemUrl, { params: new HttpParams().set('unit', 'boxes') });
+          .toHaveBeenCalledWith(requestService.requestUrl, { params: new HttpParams().set('unit', 'boxes') });
       });
     }));
   });
@@ -126,6 +126,6 @@ describe('ItemService', () => {
 
 
   it('should be created', () => {
-    expect(itemService).toBeTruthy();
+    expect(requestService).toBeTruthy();
   });
 });

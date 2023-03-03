@@ -1,44 +1,44 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject, takeUntil } from 'rxjs';
-import { Item, FoodCategory } from './item';
-import { ItemService } from './item.service';
+import { Request, FoodCategory } from './request';
+import { RequestService } from './request.service';
 
 @Component({
-  selector: 'app-item-list',
-  templateUrl: './item-list.component.html',
-  styleUrls: ['./item-list.component.scss'],
+  selector: 'app-request-list',
+  templateUrl: './request-list.component.html',
+  styleUrls: ['./request-list.component.scss'],
   providers: []
 })
-export class ItemListComponent implements OnInit, OnDestroy{
+export class RequestListComponent implements OnInit, OnDestroy{
 
-  public serverFilteredItems: Item[];
-  public filteredItems: Item[];
+  public serverFilteredRequests: Request[];
+  public filteredRequests: Request[];
 
-  public itemName: string;
-  public itemCategory: FoodCategory;
-  public itemUnit: string;
-  public itemCount: number;
-  public itemPrice: number;
-  public itemPriority: number;
+  public requestName: string;
+  public requestCategory: FoodCategory;
+  public requestUnit: string;
+  public requestCount: number;
+  public requestPrice: number;
+  public requestPriority: number;
 
   private ngUnsubscribe = new Subject<void>();
 
-  constructor(private itemService: ItemService, private snackBar: MatSnackBar) {
+  constructor(private requestService: RequestService, private snackBar: MatSnackBar) {
     // Nothing here – everything is in the injection parameters.
   }
-  getItemsFromServer(): void {
+  getRequestsFromServer(): void {
 
-    this.itemService.getItems({
-      category: this.itemCategory,
-      count: this.itemCount
+    this.requestService.getRequests({
+      category: this.requestCategory,
+      count: this.requestCount
     }).pipe(
       takeUntil(this.ngUnsubscribe)
     ).subscribe({
 
-      next: (returnedItems) => {
+      next: (returnedRequests) => {
 
-        this.serverFilteredItems = returnedItems;
+        this.serverFilteredRequests = returnedRequests;
 
         //this.updateFilter();
       },
@@ -61,7 +61,7 @@ export class ItemListComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    this.getItemsFromServer();
+    this.getRequestsFromServer();
   }
 
   ngOnDestroy() {

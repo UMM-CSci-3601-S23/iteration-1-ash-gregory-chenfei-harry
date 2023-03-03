@@ -2,14 +2,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Item, FoodCategory } from './item';
+import { Request, FoodCategory } from './request';
 import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ItemService {
-  readonly itemUrl: string = `${environment.apiUrl}items`;
+export class RequestService {
+  readonly requestUrl: string = `${environment.apiUrl}requests`;
 
   private readonly unitKey = 'unit';
   private readonly countKey = 'count';
@@ -25,7 +25,7 @@ export class ItemService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getItems(filters?: { category?: FoodCategory; count?: number; unit?: string }): Observable<Item[]> {
+  getRequests(filters?: { category?: FoodCategory; count?: number; unit?: string }): Observable<Request[]> {
     // `HttpParams` is essentially just a map used to hold key-value
     // pairs that are then encoded as "?key1=value1&key2=value2&…" in
     // the URL when we make the call to `.get()` below.
@@ -42,20 +42,20 @@ export class ItemService {
       }
     }
     // Send the HTTP GET request with the given URL and parameters.
-    // That will return the desired `Observable<Item[]>`.
-    return this.httpClient.get<Item[]>(this.itemUrl, {
+    // That will return the desired `Observable<Request[]>`.
+    return this.httpClient.get<Request[]>(this.requestUrl, {
       params: httpParams,
     });
   }
 
   /**
-   * Get the `Item` with the specified ID.
+   * Get the `Request` with the specified ID.
    *
-   * @param id the ID of the desired item
-   * @returns an `Observable` containing the resulting item.
+   * @param id the ID of the desired request
+   * @returns an `Observable` containing the resulting request.
    */
-  getItemById(id: string): Observable<Item> {
-    // The input to get could also be written as (this.itemUrl + '/' + id)
-    return this.httpClient.get<Item>(`${this.itemUrl}/${id}`);
+  getRequestById(id: string): Observable<Request> {
+    // The input to get could also be written as (this.requestUrl + '/' + id)
+    return this.httpClient.get<Request>(`${this.requestUrl}/${id}`);
   }
 }

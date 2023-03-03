@@ -1,4 +1,4 @@
-export interface Item {
+export interface Request {
   _id: string;
   name: string;
   category: FoodCategory;

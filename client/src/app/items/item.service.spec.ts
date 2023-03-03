@@ -1,10 +1,38 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { Item } from './item';
 
 import { ItemService } from './item.service';
 
 describe('ItemService', () => {
+  const testItems: Item[] = [
+    {
+      _id: '588935f5556f992bf8f37c01',
+      name: 'Apples',
+      category: 'fruits',
+      unit: 'item',
+      count: 32,
+      price: 10.23,
+      priority: 2,
+      date_added: '2023-02-28T19:17:04Z',
+      date_updated: '2023-02-28T19:17:04Z',
+      count_remaining: 2
+    },
+    {
+      _id: '588935f5556f992bf8f37c02',
+      name: 'Jon',
+      category: 'household',
+      unit: 'cups',
+      count: 100,
+      price: 9.12,
+      priority: 8,
+      date_added: '2023-01-11T19:17:04Z',
+      date_updated: '2023-01-11T19:17:04Z',
+      count_remaining: 20}
+  ];
+
   let itemService: ItemService;
 
   // These are used to mock the HTTP requests so that we (a) don't have to
@@ -28,6 +56,23 @@ describe('ItemService', () => {
   afterEach(() => {
     // After every test, assert that there are no more pending requests.
     httpTestingController.verify();
+  });
+
+  describe('When getRequests() is called with no parameters', () => {
+    it('calls `api/requests`', waitForAsync(() => {
+      // Mock the `httpClient.get()` method, so that instead of making an HTTP request,
+      // it just returns our test data.
+      const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(testItems));
+
+      itemService.getItems().subscribe(() => {
+        expect(mockedMethod)
+          .withContext('one call')
+          .toHaveBeenCalledTimes(1);
+        expect(mockedMethod)
+          .withContext('talks to the correct endpoint')
+          .toHaveBeenCalledWith(itemService.itemUrl, { params: new HttpParams() });
+      });
+    }));
   });
 
   it('should be created', () => {

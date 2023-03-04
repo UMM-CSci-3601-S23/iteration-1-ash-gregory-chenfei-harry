@@ -1,18 +1,21 @@
 <div class="flex-row">
   <div class="flex-1" *ngIf="serverFilteredRequests; else requestsError" >
-
+    <!--Title-->
+    <mat-card class= "list-of-requests">
+     <mat-card-header>
+       <mat-card-title class="request-list-title">Requests</mat-card-title>
+     </mat-card-header>
       <!-- List view -->
-        <mat-card-content>
-          <mat-nav-list class="request-nav-list">
-            <h3 mat-subheader>Requests</h3>
-            <a mat-list-request *ngFor="let request of this.filteredRequests" [routerLink]="['/requests', request._id]" class="request-list-request">
-              <!--img matListRequestAvatar [src]="request.avatar" *ngIf="this.request.avatar"-->
-              <span matListRequestTitle mat-line class="request-list-name"> {{request.name}} </span>
-              <span matListRequestLine class="request-list-category"> {{request.category}} </span>
-            </a>
-          </mat-nav-list>
-        </mat-card-content>
-
+      <mat-card-content>
+        <mat-nav-list class="request-nav-list">
+          <a mat-list-request *ngFor="let request of this.filteredRequests" [routerLink]="['/requests', request._id]" class="request-list-item">
+            <!--img matListRequestAvatar [src]="request.avatar" *ngIf="this.request.avatar"-->
+            <span matListRequestTitle mat-line class="request-list-name"> {{request.name}} </span>
+            <span matListRequestLine class="request-list-category"> {{request.category}} </span>
+          </a>
+        </mat-nav-list>
+      </mat-card-content>
+    </mat-card>
   </div>
 
   <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->

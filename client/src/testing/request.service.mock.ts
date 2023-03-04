@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { AppComponent } from 'src/app/app.component';
-import { Item, FoodCategory } from 'src/app/items/item';
-import { ItemService } from 'src/app/items/item.service';
+import { Request, FoodCategory } from 'src/app/requests/request';
+import { RequestService } from 'src/app/requests/request.service';
 
 /**
- * A 'mock' version of the `ItemService` that can be used to test components
+ * A 'mock' version of the `RequestService` that can be used to test components
  * without having to create an actual service. It needs to be `Injectable` since
  * that's how services are typically provided to components.
  */
@@ -14,8 +14,8 @@ import { ItemService } from 'src/app/items/item.service';
   providedIn: AppComponent
 })
 /* eslint @typescript-eslint/naming-convention: 'off' */
-export class MockItemService extends ItemService {
-  static testItems: Item[] = [
+export class MockRequestService extends RequestService {
+  static testRequests: Request[] = [
     {
       _id: '588935f5556f992bf8f37c01',
       name: 'Apples',
@@ -45,7 +45,7 @@ export class MockItemService extends ItemService {
     super(null);
   }
 
-  getItems(filters?: { category?: FoodCategory; count?: number; unit?: string }): Observable<Item[]> {
-    return of(MockItemService.testItems);
+  getRequests(filters?: { category?: FoodCategory; count?: number; unit?: string }): Observable<Request[]> {
+    return of(MockRequestService.testRequests);
   }
 }

@@ -10,4 +10,12 @@ export class RequestCardComponent {
 
   @Input() request: Request;
   @Input() simple?: boolean = false;
+
+    badgeHidden = false;
+    toggleBadgeVisibility(){
+
+      this.badgeHidden =! this.badgeHidden;
+    }
+
+
 }

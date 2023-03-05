@@ -8,10 +8,10 @@
       <!-- List view -->
       <mat-card-content>
         <mat-nav-list class="request-nav-list">
-          <a mat-list-request *ngFor="let request of this.filteredRequests" [routerLink]="['/requests', request._id]" class="request-list-item">
+          <a mat-list-item *ngFor="let request of this.serverFilteredRequests" [routerLink]="['/requests', request._id]" class="request-list-item">
             <!--img matListRequestAvatar [src]="request.avatar" *ngIf="this.request.avatar"-->
-            <span matListRequestTitle mat-line class="request-list-name"> {{request.name}} </span>
-            <span matListRequestLine class="request-list-category"> {{request.category}} </span>
+            <span matListItemTitle mat-line class="request-list-name"> {{request.name}} </span>
+            <span matListItemLine class="request-list-category"> {{request.category}} </span>
           </a>
         </mat-nav-list>
       </mat-card-content>

@@ -29,10 +29,7 @@ export class RequestListComponent implements OnInit, OnDestroy{
   }
   getRequestsFromServer(): void {
 
-    this.requestService.getRequests({
-      category: this.requestCategory,
-      count: this.requestCount
-    }).pipe(
+    this.requestService.getRequests().pipe(
       takeUntil(this.ngUnsubscribe)
     ).subscribe({
 
@@ -40,7 +37,6 @@ export class RequestListComponent implements OnInit, OnDestroy{
 
         this.serverFilteredRequests = returnedRequests;
 
-        //this.updateFilter();
       },
 
       error: (err) => {

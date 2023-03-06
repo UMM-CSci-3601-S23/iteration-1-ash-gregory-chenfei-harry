@@ -9,7 +9,7 @@ describe('App', () => {
     page.getAppTitle().should('contain', 'CSCI 3601 Iteration Template');
   });
 
-  it('The sidenav should open, navigate to "Users" and back to "Home"', () => {
+  it('The sidenav should open, navigate to "Users", "Requests" and back to "Home"', () => {
     // Before clicking on the button, the sidenav should be hidden
     page.getSidenav()
       .should('be.hidden');
@@ -19,6 +19,12 @@ describe('App', () => {
     page.getSidenavButton().click();
     page.getNavLink('Users').click();
     cy.url().should('match', /\/users$/);
+    page.getSidenav()
+      .should('be.hidden');
+
+    page.getSidenavButton().click();
+    page.getNavLink('Requests').click();
+    cy.url().should('match', /\/requests$/);
     page.getSidenav()
       .should('be.hidden');
 

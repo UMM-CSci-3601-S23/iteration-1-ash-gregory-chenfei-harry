@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 
+import {MatBadgeModule} from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
@@ -22,6 +23,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { AddUserComponent } from './users/add-user.component';
 import { AppComponent } from './app.component';
@@ -30,6 +32,9 @@ import { HomeComponent } from './home/home.component';
 import { UserCardComponent } from './users/user-card.component';
 import { UserListComponent } from './users/user-list.component';
 import { UserProfileComponent } from './users/user-profile.component';
+import { RequestCardComponent } from './requests/request-card.component';
+import { RequestListComponent } from './requests/request-list.component';
+import { RequestProfileComponent } from './requests/request-profile.component';
 
 const MATERIAL_MODULES: any[] = [
   MatButtonModule,
@@ -48,6 +53,7 @@ const MATERIAL_MODULES: any[] = [
   MatSnackBarModule,
   MatToolbarModule,
   MatTooltipModule,
+  BrowserAnimationsModule,
 ];
 
 @NgModule({
@@ -58,6 +64,9 @@ const MATERIAL_MODULES: any[] = [
     UserCardComponent,
     UserProfileComponent,
     AddUserComponent,
+    RequestCardComponent,
+    RequestListComponent,
+    RequestProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +77,8 @@ const MATERIAL_MODULES: any[] = [
     HttpClientModule,
     MATERIAL_MODULES,
     LayoutModule,
+    MatBadgeModule,
+    MatChipsModule
   ],
   bootstrap: [AppComponent]
 })

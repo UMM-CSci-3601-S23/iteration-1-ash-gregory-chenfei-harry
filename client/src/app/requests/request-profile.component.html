@@ -1,0 +1,6 @@
+<div class="flex-row">
+  <div class="flex-1" *ngIf="request; else loading">
+    <app-request-card [request]="this.request"></app-request-card>
+  </div>
+</div>
+<ng-template #loading>Loading Request Profile data...</ng-template>

@@ -1,0 +1,20 @@
+<mat-card class="request-card" *ngIf="this.request">
+  <mat-card-header>
+    <!--img mat-card-avatar [src]="this.request.avatar" class="request-avatar" *ngIf="this.request.avatar"-->
+    <mat-card-title class="request-card-name" >{{ this.request.name }}</mat-card-title>
+    <mat-card-subtitle class="request-card-catgory">Category: {{ this.request.category }}</mat-card-subtitle>
+    <mat-card-subtitle class="request-card-unit">Unit: {{ this.request.unit }}</mat-card-subtitle>
+    <mat-icon *ngIf="this.request.name === 'Apples'">apple</mat-icon>
+    <mat-icon *ngIf="this.request.name === 'Jon'">home</mat-icon>
+  </mat-card-header>
+  <!--mat-card-content *ngIf="!this.simple">
+    <p>Role: <span class="request-card-role">{{ this.request.role }}</span></p>
+    <p>Age: <span class="request-card-age">{{ this.request.age }}</span></p>
+    <p>Email: <a href="mailto:{{this.request.email}}" class="request-card-email">{{this.request.email}}</a></p>
+  </mat-card-content-->
+  <mat-card-actions>
+    <button mat-raised-button data-test="DonateButton" *ngIf="this.simple" [routerLink]="['/requests', this.request._id]" color="primary"
+    (click)="toggleBadgeVisibility()" [matBadge]="request.count" matBadgeSize="medium" matBadgePosition="after" matBadgeColor="warn" >Click here to donate</button>
+  </mat-card-actions>
+</mat-card>
+

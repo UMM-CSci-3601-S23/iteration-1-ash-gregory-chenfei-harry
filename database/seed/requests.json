@@ -4,7 +4,7 @@
       "$oid": "588935f5556f992bf8f37c01"
     },
     "name": "Apples",
-    "category": "fruit",
+    "category": "fruits",
     "unit": "item",
     "count": 32,
     "price": 10.23,

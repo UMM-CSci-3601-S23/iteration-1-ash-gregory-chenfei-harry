@@ -22,11 +22,16 @@ export class RequestListComponent implements OnInit, OnDestroy{
   public requestPrice: number;
   public requestPriority: number;
 
+
   private ngUnsubscribe = new Subject<void>();
 
+
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   constructor(private requestService: RequestService, private snackBar: MatSnackBar) {
     // Nothing here – everything is in the injection parameters.
   }
+
+
   getRequestsFromServer(): void {
 
     this.requestService.getRequests().pipe(

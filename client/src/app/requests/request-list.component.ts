@@ -33,7 +33,6 @@ export class RequestListComponent implements OnInit, OnDestroy{
 
 
   getRequestsFromServer(): void {
-
     this.requestService.getRequests().pipe(
       takeUntil(this.ngUnsubscribe)
     ).subscribe({

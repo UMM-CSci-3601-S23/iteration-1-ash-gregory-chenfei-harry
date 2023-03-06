@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
 public class UserSpec {
 
   private static final String FAKE_ID_STRING_1 = "fakeIdOne";
@@ -43,7 +44,7 @@ public class UserSpec {
 
     assertTrue(user1.hashCode() == user2.hashCode());
   }
-
+  @SuppressWarnings({"unlikely-arg-type"})
   @Test
   void usersAreNotEqualToOtherKindsOfThings() {
     user1._id = FAKE_ID_STRING_1;

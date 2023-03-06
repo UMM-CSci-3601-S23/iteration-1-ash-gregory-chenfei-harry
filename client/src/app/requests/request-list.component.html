@@ -1,0 +1,62 @@
+<div class="flex-row">
+  <div class="flex-1" *ngIf="serverFilteredRequests; else requestsError" >
+    <!--Title-->
+    <mat-card class= "list-of-requests">
+     <mat-card-header>
+       <mat-card-title class="request-list-title">Requests</mat-card-title>
+     </mat-card-header>
+
+    <!-- Card grid view -->
+    <div class="request-cards-container flex-row gap-8 flex-wrap">
+      <app-request-card [simple]="true" *ngFor="let request of serverFilteredRequests" class="request-card" [request]="request" >
+
+      </app-request-card>
+    </div>
+
+
+
+    <!-- <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Shiba Inu</mat-card-title>
+          <mat-card-subtitle>Extra large</mat-card-subtitle>
+          <img mat-card-xl-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+        {{"longText"}}
+      </mat-card-content>
+    </mat-card> -->
+
+      <!-- List view -->
+      <mat-card-content>
+        <mat-nav-list class="request-nav-list">
+          <a mat-list-item *ngFor="let request of this.serverFilteredRequests" [routerLink]="['/requests', request._id]" class="request-list-item">
+            <!--img matListRequestAvatar [src]="request.avatar" *ngIf="this.request.avatar"-->
+            <span matListItemTitle mat-line class="request-list-name"> {{request.name}} </span>
+            <span matListItemLine class="request-list-category"> {{request.category}} </span>
+          </a>
+        </mat-nav-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+
+  <div>
+
+  </div>
+
+
+  <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
+  <ng-template #requestsError>
+    <div class="flex-1" class="request-error">
+      <mat-error>
+        There was a problem loading the requests. Possibly the server is down or perhaps there are network
+        issues.
+      </mat-error>
+      <mat-error>
+        Please wait a bit and try again or start the server.
+      </mat-error>
+    </div>
+  </ng-template>
+</div>

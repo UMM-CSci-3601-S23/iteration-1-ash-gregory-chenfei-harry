@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { FoodCategory } from 'src/app/requests/request';
+import { RequestService } from 'src/app/requests/request.service';
 
 @Component({
   selector: 'app-add-request',
@@ -13,15 +15,15 @@ export class AddRequestComponent {
     // Add requirements for the name field
     name: new FormControl('', Validators.compose([Validators.required, Validators.minLength(1)])),
     // Add requirements for the category field
-    category: new FormControl('', Validators.compose([Validators.required, Validators.minLength(1)])),
+    category: new FormControl<FoodCategory>('misc', Validators.compose([Validators.required, Validators.minLength(1)])),
     // Add requirements for the unit field
     unit: new FormControl('', Validators.compose([Validators.required, Validators.minLength(1)])),
     // Add requirements for the count field
-    count: new FormControl('', Validators.compose([Validators.required, Validators.min(1), Validators.pattern('^[0-9]+$')])),
+    count: new FormControl<number>(null, Validators.compose([Validators.required, Validators.min(1), Validators.pattern('^[0-9]+$')])),
     // Add requirements for the price field
-    price: new FormControl('', Validators.compose([Validators.required, Validators.min(0)])),
+    price: new FormControl<number>(null, Validators.compose([Validators.required, Validators.min(0)])),
     // Add requirements for the priority field
-    priority: new FormControl('', Validators.compose([Validators.required, Validators.min(1), Validators.pattern('^[0-9]+$')])),
+    priority: new FormControl<number>(null, Validators.compose([Validators.required, Validators.min(1), Validators.pattern('^[0-9]+$')])),
   });
 
   // We can only display one error at a time,
@@ -61,7 +63,7 @@ export class AddRequestComponent {
   };
 
   // Constructor which injects the components we need
-  constructor(private snackBar: MatSnackBar, private router: Router) {
+  constructor(private snackBar: MatSnackBar, private router: Router, private service: RequestService) {
   }
 
   formControlHasError(controlName: string): boolean {
@@ -79,16 +81,7 @@ export class AddRequestComponent {
   }
 
   submitForm() {
-    /*
-    this.requestService.addRequest(this.addRequestForm.value).subscribe({
-      next: (newId) => {
-        this.snackBar.open(
-          `Added request ${this.addRequestForm.value.name}`,
-          null,
-          { duration: 2000 }
-        );
-        this.router.navigate(['/requests/', newId]);
-      },
+    this.service.addRequest(this.addRequestForm.value).subscribe({
       error: err => {
         this.snackBar.open(
           `Problem contacting the server - Error Code: ${err.status}\nMessage: ${err.message}`,
@@ -96,8 +89,14 @@ export class AddRequestComponent {
           { duration: 5000 }
         );
       },
-      // complete: () => console.log('Add user completes!')
-    });*/
+      complete: () => {
+        this.snackBar.open(
+          `Request for ${this.addRequestForm.value.name} successfully added`,
+          'OK',
+          { duration: 5000 }
+        );
+      }
+    });
   }
 }
 

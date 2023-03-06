@@ -58,4 +58,9 @@ export class RequestService {
     // The input to get could also be written as (this.requestUrl + '/' + id)
     return this.httpClient.get<Request>(`${this.requestUrl}/${id}`);
   }
+
+  addRequest(newRequest: Partial<Request>): Observable<string> {
+    // Send post request to add a new user with the user data as the body.
+    return this.httpClient.post<{id: string}>(this.requestUrl, newRequest).pipe(map(res => res.id));
+  }
 }

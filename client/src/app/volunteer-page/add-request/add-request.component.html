@@ -56,12 +56,21 @@
             {{getErrorMessage('price')}}
           </mat-error>
         </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Priority</mat-label>
+          <input matInput type="number"
+                formControlName="priority" required>
+          <mat-error *ngIf="formControlHasError('priority')" data-test="priorityError">
+            {{getErrorMessage('priority')}}
+          </mat-error>
+        </mat-form-field>
       </div>
       <button
         mat-button
         type="button"
         color="primary"
-        [disabled]="!addRequestForm.valid"
+
         type="submit"
         data-test="confirmAddRequestButton"
       >

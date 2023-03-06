@@ -53,6 +53,7 @@ const MATERIAL_MODULES: any[] = [
   MatSnackBarModule,
   MatToolbarModule,
   MatTooltipModule,
+  BrowserAnimationsModule,
 ];
 
 @NgModule({

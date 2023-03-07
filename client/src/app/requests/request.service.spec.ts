@@ -71,7 +71,7 @@ describe('RequestService', () => {
           .toHaveBeenCalledTimes(1);
         expect(mockedMethod)
           .withContext('talks to the correct endpoint')
-          .toHaveBeenCalledWith(requestService.requestUrl, { params: new HttpParams() });
+          .toHaveBeenCalledWith(requestService.requestUrl);
       });
     }));
   });

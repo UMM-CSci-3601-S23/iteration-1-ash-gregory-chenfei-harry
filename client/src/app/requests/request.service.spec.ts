@@ -71,57 +71,57 @@ describe('RequestService', () => {
           .toHaveBeenCalledTimes(1);
         expect(mockedMethod)
           .withContext('talks to the correct endpoint')
-          .toHaveBeenCalledWith(requestService.requestUrl, { params: new HttpParams() });
+          .toHaveBeenCalledWith(requestService.requestUrl);
       });
     }));
   });
+/////////////////////////// We don't need this right now since we aren't currently filtering by parameters.
+  // describe('When getRequests() is called with parameters', () => {
+  //   it('calls `api/requests with the right arguments for category`', waitForAsync(() => {
+  //     // Mock the `httpClient.get()` method, so that instead of making an HTTP request,
+  //     // it just returns our test data.
+  //     const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(testRequests));
 
-  describe('When getRequests() is called with parameters', () => {
-    it('calls `api/requests with the right arguments for category`', waitForAsync(() => {
-      // Mock the `httpClient.get()` method, so that instead of making an HTTP request,
-      // it just returns our test data.
-      const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(testRequests));
+  //     requestService.getRequests({category: 'fruits'}).subscribe(() => {
+  //       expect(mockedMethod)
+  //         .withContext('one call')
+  //         .toHaveBeenCalledTimes(1);
+  //       expect(mockedMethod)
+  //         .withContext('talks to the correct endpoint')
+  //         .toHaveBeenCalledWith(requestService.requestUrl, { params: new HttpParams().set('category', 'fruits') });
+  //     });
+  //   }));
 
-      requestService.getRequests({category: 'fruits'}).subscribe(() => {
-        expect(mockedMethod)
-          .withContext('one call')
-          .toHaveBeenCalledTimes(1);
-        expect(mockedMethod)
-          .withContext('talks to the correct endpoint')
-          .toHaveBeenCalledWith(requestService.requestUrl, { params: new HttpParams().set('category', 'fruits') });
-      });
-    }));
+  //   it('calls `api/requests with the right arguments for count`', waitForAsync(() => {
+  //     // Mock the `httpClient.get()` method, so that instead of making an HTTP request,
+  //     // it just returns our test data.
+  //     const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(testRequests));
 
-    it('calls `api/requests with the right arguments for count`', waitForAsync(() => {
-      // Mock the `httpClient.get()` method, so that instead of making an HTTP request,
-      // it just returns our test data.
-      const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(testRequests));
+  //     requestService.getRequests({count: 4}).subscribe(() => {
+  //       expect(mockedMethod)
+  //         .withContext('one call')
+  //         .toHaveBeenCalledTimes(1);
+  //       expect(mockedMethod)
+  //         .withContext('talks to the correct endpoint')
+  //         .toHaveBeenCalledWith(requestService.requestUrl, { params: new HttpParams().set('count', '4') });
+  //     });
+  //   }));
 
-      requestService.getRequests({count: 4}).subscribe(() => {
-        expect(mockedMethod)
-          .withContext('one call')
-          .toHaveBeenCalledTimes(1);
-        expect(mockedMethod)
-          .withContext('talks to the correct endpoint')
-          .toHaveBeenCalledWith(requestService.requestUrl, { params: new HttpParams().set('count', '4') });
-      });
-    }));
+  //   it('calls `api/requests with the right arguments for unit`', waitForAsync(() => {
+  //     // Mock the `httpClient.get()` method, so that instead of making an HTTP request,
+  //     // it just returns our test data.
+  //     const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(testRequests));
 
-    it('calls `api/requests with the right arguments for unit`', waitForAsync(() => {
-      // Mock the `httpClient.get()` method, so that instead of making an HTTP request,
-      // it just returns our test data.
-      const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(testRequests));
-
-      requestService.getRequests({unit: 'boxes'}).subscribe(() => {
-        expect(mockedMethod)
-          .withContext('one call')
-          .toHaveBeenCalledTimes(1);
-        expect(mockedMethod)
-          .withContext('talks to the correct endpoint')
-          .toHaveBeenCalledWith(requestService.requestUrl, { params: new HttpParams().set('unit', 'boxes') });
-      });
-    }));
-  });
+  //     requestService.getRequests({unit: 'boxes'}).subscribe(() => {
+  //       expect(mockedMethod)
+  //         .withContext('one call')
+  //         .toHaveBeenCalledTimes(1);
+  //       expect(mockedMethod)
+  //         .withContext('talks to the correct endpoint')
+  //         .toHaveBeenCalledWith(requestService.requestUrl, { params: new HttpParams().set('unit', 'boxes') });
+  //     });
+  //   }));
+  //  });
 
 
 

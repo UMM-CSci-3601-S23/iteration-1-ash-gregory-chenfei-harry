@@ -25,27 +25,10 @@ export class RequestService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getRequests(filters?: { category?: FoodCategory; count?: number; unit?: string }): Observable<Request[]> {
-    // `HttpParams` is essentially just a map used to hold key-value
-    // pairs that are then encoded as "?key1=value1&key2=value2&…" in
-    // the URL when we make the call to `.get()` below.
-    let httpParams: HttpParams = new HttpParams();
-    if (filters) {
-      if (filters.category) {
-        httpParams = httpParams.set(this.categoryKey, filters.category);
-      }
-      if (filters.count) {
-        httpParams = httpParams.set(this.countKey, filters.count.toString());
-      }
-      if (filters.unit) {
-        httpParams = httpParams.set(this.unitKey, filters.unit);
-      }
-    }
-    // Send the HTTP GET request with the given URL and parameters.
+  getRequests(): Observable<Request[]> {
+    // Send the HTTP GET request with no parameters to get all requests.
     // That will return the desired `Observable<Request[]>`.
-    return this.httpClient.get<Request[]>(this.requestUrl, {
-      params: httpParams,
-    });
+    return this.httpClient.get<Request[]>(this.requestUrl);
   }
 
   /**

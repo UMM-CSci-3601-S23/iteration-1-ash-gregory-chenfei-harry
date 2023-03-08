@@ -73,3 +73,41 @@ describe('RequestListComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+
+describe('Misbehaving Request List', () => {
+  let requestList: RequestListComponent;
+  let fixture: ComponentFixture<RequestListComponent>;
+
+  let requestServiceStub: {
+    getRequests: () => Observable<Request[]>;
+  };
+
+  beforeEach(() => {
+    // stub UserService for test purposes
+    requestServiceStub = {
+      getRequests: () => new Observable(observer => {
+        observer.error('getRequests() Observer generates an error');
+      }),
+    };
+
+    TestBed.configureTestingModule({
+      imports: [COMMON_IMPORTS],
+      declarations: [RequestListComponent],
+      providers: [{ provide: RequestService, useValue: requestServiceStub }]
+    });
+  });
+
+  beforeEach(waitForAsync(() => {
+    TestBed.compileComponents().then(() => {
+      fixture = TestBed.createComponent(RequestListComponent);
+      requestList = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+  }));
+
+  it('generates an error if we don\'t set up a RequestListService', () => {
+
+    expect(requestList.serverFilteredRequests).toBeUndefined();
+  });
+});

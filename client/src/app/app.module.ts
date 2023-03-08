@@ -35,6 +35,8 @@ import { UserProfileComponent } from './users/user-profile.component';
 import { RequestCardComponent } from './requests/request-card.component';
 import { RequestListComponent } from './requests/request-list.component';
 import { RequestProfileComponent } from './requests/request-profile.component';
+import { VolunteerPageComponent } from './volunteer-page/volunteer-page.component';
+import { AddRequestComponent } from './volunteer-page/add-request/add-request.component';
 
 const MATERIAL_MODULES: any[] = [
   MatButtonModule,
@@ -67,6 +69,8 @@ const MATERIAL_MODULES: any[] = [
     RequestCardComponent,
     RequestListComponent,
     RequestProfileComponent,
+    VolunteerPageComponent,
+    AddRequestComponent,
   ],
   imports: [
     BrowserModule,

@@ -38,9 +38,7 @@ export class RequestListComponent implements OnInit, OnDestroy{
     ).subscribe({
 
       next: (returnedRequests) => {
-
-        this.serverFilteredRequests = returnedRequests;
-
+        this.serverFilteredRequests = returnedRequests.sort((reqa, reqb) => reqa.priority - reqb.priority);
       },
 
       error: (err) => {

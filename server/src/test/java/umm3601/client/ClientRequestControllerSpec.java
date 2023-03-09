@@ -3,10 +3,10 @@ package umm3601.client;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+//import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static com.mongodb.client.model.Filters.eq;
+//import static com.mongodb.client.model.Filters.eq;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.bson.Document;
-import org.bson.types.ObjectId;
+//import org.bson.types.ObjectId;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,8 +36,8 @@ import com.mongodb.client.MongoDatabase;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 import io.javalin.json.JavalinJackson;
-import io.javalin.validation.BodyValidator;
-import io.javalin.validation.ValidationException;
+//import io.javalin.validation.BodyValidator;
+//import io.javalin.validation.ValidationException;
 
 @SuppressWarnings({ "MagicNumber" })
 public class ClientRequestControllerSpec {

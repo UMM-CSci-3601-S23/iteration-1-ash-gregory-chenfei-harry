@@ -1,23 +1,29 @@
 <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
   {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
 </button>
-<mat-stepper [linear]="isLinear" #stepper>
+<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Fill out your name</ng-template>
+      <ng-template matStepLabel>Does the FoodShelf meet ALL needs of your preferred diet?</ng-template>
       <mat-form-field appearance="fill">
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+        <mat-label></mat-label>
+        <mat-select>
+          <mat-option>--</mat-option>
+          <mat-option value="Yes">Yes</mat-option>
+          <mat-option value="No">No</mat-option>
+        </mat-select>
+        <input matInput placeholder="Please select" formControlName="firstCtrl" required>
       </mat-form-field>
       <div>
         <button mat-button matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+  <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Please list the name or description of an item</ng-template>
       <mat-form-field appearance="fill">
-        <mat-label>Address</mat-label>
+        <mat-label></mat-label>
         <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
                required>
       </mat-form-field>

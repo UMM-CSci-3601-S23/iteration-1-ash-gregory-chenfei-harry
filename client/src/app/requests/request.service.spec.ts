@@ -75,36 +75,6 @@ describe('RequestService', () => {
       });
     }));
   });
-
-  describe('When addRequest() is called', () => {
-    it('calls `api/requests` with post data', waitForAsync(() => {
-      // Mock the `httpClient.get()` method, so that instead of making an HTTP request,
-      // it just returns our test data.
-      const mockedMethod = spyOn(httpClient, 'post').and.returnValue(of(testRequests));
-
-      const req: Request = {
-        _id: ' ',
-        name: 'Apples',
-        category: 'fruits',
-        unit: 'item',
-        count: 32,
-        price: 10.23,
-        priority: 2,
-        date_added: '2023-02-28T19:17:04Z',
-        date_updated: '2023-02-28T19:17:04Z',
-        count_remaining: 2
-      };
-
-      requestService.addRequest(req).subscribe(() => {
-        expect(mockedMethod)
-          .withContext('one call')
-          .toHaveBeenCalledTimes(1);
-        expect(mockedMethod)
-          .withContext('talks to the correct endpoint')
-          .toHaveBeenCalled();
-      });
-    }));
-  });
 /////////////////////////// We don't need this right now since we aren't currently filtering by parameters.
   // describe('When getRequests() is called with parameters', () => {
   //   it('calls `api/requests with the right arguments for category`', waitForAsync(() => {
@@ -153,7 +123,26 @@ describe('RequestService', () => {
   //   }));
   //  });
 
+  describe('Adding a user using `addUser()`', () => {
+    it('talks to the right endpoint and is called once', waitForAsync(() => {
+      // Mock the `httpClient.addUser()` method, so that instead of making an HTTP request,
+      // it just returns our test data.
+      const USER_ID = 'pat_id';
+      const mockedMethod = spyOn(httpClient, 'post').and.returnValue(of(USER_ID));
 
+      // paying attention to what is returned (undefined) didn't work well here,
+      // but I'm putting something in here to remind us to look into that
+      requestService.addRequest(testRequests[1]).subscribe((returnedString) => {
+        console.log('The thing returned was:' + returnedString);
+        expect(mockedMethod)
+          .withContext('one call')
+          .toHaveBeenCalledTimes(1);
+        expect(mockedMethod)
+          .withContext('talks to the correct endpoint')
+          .toHaveBeenCalledWith(requestService.requestUrl, testRequests[1]);
+      });
+    }));
+  });
 
   it('should be created', () => {
     expect(requestService).toBeTruthy();

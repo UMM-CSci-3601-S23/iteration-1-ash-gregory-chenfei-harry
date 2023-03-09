@@ -57,11 +57,7 @@ public class ClientRequestController {
     ClientRequest request = ctx.bodyValidator(ClientRequest.class)
     .check(rq -> rq.need_description != null && rq.need_description.length() > 0,
         "Request must have a non-empty need_description")
-    .check(rq -> rq.item_description != null && rq.item_description.length() > 0,
-        "Request must have a non-empty item_description")
     .get();
-
-
 
     // The initial `date_added`is set to the current time
     // formatted as an ISO 8601 string

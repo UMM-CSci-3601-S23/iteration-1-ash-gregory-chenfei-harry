@@ -75,6 +75,36 @@ describe('RequestService', () => {
       });
     }));
   });
+
+  describe('When addRequest() is called', () => {
+    it('calls `api/requests` with post data', waitForAsync(() => {
+      // Mock the `httpClient.get()` method, so that instead of making an HTTP request,
+      // it just returns our test data.
+      const mockedMethod = spyOn(httpClient, 'post').and.returnValue(of(testRequests));
+
+      const req: Request = {
+        _id: ' ',
+        name: 'Apples',
+        category: 'fruits',
+        unit: 'item',
+        count: 32,
+        price: 10.23,
+        priority: 2,
+        date_added: '2023-02-28T19:17:04Z',
+        date_updated: '2023-02-28T19:17:04Z',
+        count_remaining: 2
+      };
+
+      requestService.addRequest(req).subscribe(() => {
+        expect(mockedMethod)
+          .withContext('one call')
+          .toHaveBeenCalledTimes(1);
+        expect(mockedMethod)
+          .withContext('talks to the correct endpoint')
+          .toHaveBeenCalled();
+      });
+    }));
+  });
 /////////////////////////// We don't need this right now since we aren't currently filtering by parameters.
   // describe('When getRequests() is called with parameters', () => {
   //   it('calls `api/requests with the right arguments for category`', waitForAsync(() => {

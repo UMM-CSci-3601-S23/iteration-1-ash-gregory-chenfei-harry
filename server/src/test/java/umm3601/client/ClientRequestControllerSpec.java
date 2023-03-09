@@ -1,8 +1,6 @@
 package umm3601.client;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 //import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -35,7 +33,7 @@ import com.mongodb.client.MongoDatabase;
 
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
-import io.javalin.json.JavalinJackson;
+// import io.javalin.json.JavalinJackson;
 //import io.javalin.validation.BodyValidator;
 //import io.javalin.validation.ValidationException;
 
@@ -50,7 +48,7 @@ public class ClientRequestControllerSpec {
   private static MongoDatabase db;
 
   // Used to translate between JSON and POJOs.
-  private static JavalinJackson javalinJackson = new JavalinJackson();
+  // private static JavalinJackson javalinJackson = new JavalinJackson();
 
   // The mocked javalin context
   @Mock

@@ -88,19 +88,19 @@ public class ClientRequestControllerSpec {
     MockitoAnnotations.openMocks(this);
 
     // Setup database
-    MongoCollection<Document> clientDocuments = db.getCollection("clients");
+    MongoCollection<Document> clientDocuments = db.getCollection("clientRequests");
     clientDocuments.drop();
     List<Document> testClients = new ArrayList<>();
     testClients.add(
         new Document()
-            .append("need_desciption", "The food shelf does not meet my needs.")
-            .append("item_description", "Salsa")
+            .append("need_met", false)
+            .append("need_description", "Salsa")
             .append("date_added", "2023-01-12T19:17:42Z"));
 
     testClients.add(
         new Document()
-            .append("need_desciption", "The food shelf doesn't have gluten free options.")
-            .append("item_description", "Gluten free pasta")
+            .append("need_met", true)
+            .append("need_description", "The food shelf doesn't have gluten free options.")
             .append("date_added", "2023-01-12T19:17:45Z"));
 
     clientDocuments.insertMany(testClients);
@@ -123,6 +123,6 @@ public class ClientRequestControllerSpec {
     verify(ctx).status(HttpStatus.OK);
 
     // Make sure the number of elements in the database is the same as the number of elements returned
-    assertEquals(db.getCollection("clients").countDocuments(), clientArrayListCaptor.getValue().size());
+    assertEquals(db.getCollection("clientRequests").countDocuments(), clientArrayListCaptor.getValue().size());
   }
 }

@@ -8,8 +8,8 @@ public class ClientRequest {
   @ObjectId @Id
 
   public String _id;
+  public boolean need_met;
   public String need_description;
-  public String item_description;
   public String date_added;
 
   /*

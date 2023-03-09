@@ -12,9 +12,8 @@ export class ClientService {
   readonly requestUrl: string = `${environment.apiUrl}requests`;
 
   constructor(public myHttpClient: HttpClient) { }
-
   addRequest(newRequest: Partial<ClientRequest>): Observable<string> {
-    // Send post request to add a new user with the user data as the body.
+    // Send post request to add a new request with the user data as the body.
     return this.myHttpClient.post<{id: string}>(this.requestUrl, newRequest).pipe(map(res => res.id));
   }
 }

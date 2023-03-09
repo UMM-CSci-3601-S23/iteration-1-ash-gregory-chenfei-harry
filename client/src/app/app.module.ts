@@ -39,7 +39,6 @@ import { RequestProfileComponent } from './requests/request-profile.component';
 import { VolunteerPageComponent } from './volunteer-page/volunteer-page.component';
 import { AddRequestComponent } from './volunteer-page/add-request/add-request.component';
 import { ClientComponent } from './client/client.component';
-import { StepperClientComponent } from './client/stepper-client/stepper-client.component';
 
 const MATERIAL_MODULES: any[] = [
   MatButtonModule,
@@ -76,7 +75,6 @@ const MATERIAL_MODULES: any[] = [
     VolunteerPageComponent,
     AddRequestComponent,
     ClientComponent,
-    StepperClientComponent,
   ],
   imports: [
     BrowserModule,

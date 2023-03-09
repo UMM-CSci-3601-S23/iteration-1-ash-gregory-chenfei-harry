@@ -16,5 +16,9 @@ describe('Request list', () => {
     page.getRequestTitle().should('have.text', 'Requests');
   });
 
+  it('Should show 2 requests in both card and list view', () => {
+    page.getRequestCards().should('have.length', 2);
+    page.getRequestListItems().should('have.length', 2);
+  });
 
 });

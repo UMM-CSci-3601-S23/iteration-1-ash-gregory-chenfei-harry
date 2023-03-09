@@ -9,7 +9,7 @@ import { ClientRequest } from './client';
 })
 export class ClientService {
 
-  readonly requestUrl: string = `${environment.apiUrl}requests`;
+  readonly requestUrl: string = `${environment.apiUrl}clients`;
 
   constructor(public myHttpClient: HttpClient) { }
   addRequest(newRequest: Partial<ClientRequest>): Observable<string> {

@@ -3,7 +3,7 @@ package umm3601.request;
 import org.mongojack.Id;
 import org.mongojack.ObjectId;
 
-@SuppressWarnings({"VisibilityModifier"})
+@SuppressWarnings({"VisibilityModifier", "MemberName"})
 public class Request {
   @ObjectId @Id
 

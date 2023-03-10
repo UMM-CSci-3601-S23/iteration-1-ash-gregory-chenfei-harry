@@ -21,6 +21,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ClientRequest } from '../client/client';
 
 const COMMON_IMPORTS: unknown[] = [
   FormsModule,
@@ -79,5 +80,48 @@ describe('VolunteerPageComponent', () => {
   }));
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+});
+
+describe('Misbehaving User List', () => {
+  let userList: VolunteerPageComponent;
+  let fixture: ComponentFixture<VolunteerPageComponent>;
+
+  let serviceStub: {
+    getRequests: () => Observable<ClientRequest[]>;
+  };
+
+  beforeEach(() => {
+    serviceStub = {
+      getRequests: () => new Observable(observer => {
+        observer.error('getUsers() Observer generates an error');
+      })
+    };
+
+    TestBed.configureTestingModule({
+      imports: [COMMON_IMPORTS],
+      declarations: [VolunteerPageComponent],
+      // providers:    [ UserService ]  // NO! Don't provide the real service!
+      // Provide a test-double instead
+      providers: [{ provide: ClientService, useValue: serviceStub }]
+    });
+  });
+
+  // Construct the `userList` used for the testing in the `it` statement
+  // below.
+  beforeEach(waitForAsync(() => {
+    TestBed.compileComponents().then(() => {
+      fixture = TestBed.createComponent(VolunteerPageComponent);
+      userList = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+  }));
+
+  it('generates an error if we don\'t set up a UserListService', () => {
+    // Since calling either getUsers() or getUsersFiltered() return
+    // Observables that then throw exceptions, we don't expect the component
+    // to be able to get a list of users, and serverFilteredUsers should
+    // be undefined.
+    expect(userList.requests).toBeUndefined();
   });
 });

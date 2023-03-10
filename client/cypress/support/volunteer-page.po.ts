@@ -1,8 +1,6 @@
 export class VolunteerPage {
   private readonly baseUrl = '/volunteer';
   private readonly pageTitle = '.volunteer-page-title';
-  private readonly button = '[data-test=confirmAddRequestButton]';
-  private readonly formFieldSelector = `mat-form-field`;
 
   navigateTo() {
     return cy.visit(this.baseUrl);
@@ -15,12 +13,5 @@ export class VolunteerPage {
    */
   getPageTitle() {
     return cy.get(this.pageTitle);
-  }
-
-  addRequestButton() {
-    return cy.get(this.button);
-  }
-  getFormField(fieldName: string) {
-    return cy.get(`${this.formFieldSelector} [formcontrolname=${fieldName}]`);
   }
 }

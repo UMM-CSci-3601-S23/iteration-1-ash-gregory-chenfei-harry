@@ -1,4 +1,4 @@
-package umm3601.request;
+package umm3601.requests;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

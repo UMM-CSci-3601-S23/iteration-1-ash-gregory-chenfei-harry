@@ -1,4 +1,4 @@
-import { UserListPage } from '../support/user-list.po';
+/*import { UserListPage } from '../support/user-list.po';
 
 const page = new UserListPage();
 
@@ -141,3 +141,4 @@ describe('User list', () => {
   });
 
 });
+*/

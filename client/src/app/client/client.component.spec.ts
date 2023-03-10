@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -48,5 +48,19 @@ describe('ClientComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('The price field', () => {
+    let priceControl: AbstractControl;
+
+    beforeEach(() => {
+      priceControl = component.addClientRequestForm.controls.need_description;
+    });
+
+    it('should not allow negative values', () => {
+      priceControl.setValue(null);
+      expect(priceControl.valid).toBeFalsy();
+      expect(component.getErrorMessage('need_description')).toBeTruthy();
+    });
   });
 });

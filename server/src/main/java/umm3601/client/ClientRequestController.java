@@ -55,13 +55,13 @@ public class ClientRequestController {
   public void addNewClientRequest(Context ctx) {
     // Extract the information to form the new request from the context
     ClientRequest request = ctx.bodyValidator(ClientRequest.class)
-    .check(rq -> rq.need_description != null && rq.need_description.length() > 0,
-        "Request must have a non-empty need_description")
+    .check(rq -> rq.needDescription != null && rq.needDescription.length() > 0,
+        "Request must have a non-empty needDescription")
     .get();
 
-    // The initial `date_added`is set to the current time
+    // The initial `dateAdded`is set to the current time
     // formatted as an ISO 8601 string
-    request.date_added = ZonedDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_INSTANT);
+    request.dateAdded = ZonedDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_INSTANT);
 
 
     // Insert the request into the database

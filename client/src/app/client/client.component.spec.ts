@@ -54,13 +54,13 @@ describe('ClientComponent', () => {
     let priceControl: AbstractControl;
 
     beforeEach(() => {
-      priceControl = component.addClientRequestForm.controls.need_description;
+      priceControl = component.addClientRequestForm.controls.needDescription;
     });
 
     it('should not allow negative values', () => {
       priceControl.setValue(null);
       expect(priceControl.valid).toBeFalsy();
-      expect(component.getErrorMessage('need_description')).toBeTruthy();
+      expect(component.getErrorMessage('needDescription')).toBeTruthy();
     });
   });
 });

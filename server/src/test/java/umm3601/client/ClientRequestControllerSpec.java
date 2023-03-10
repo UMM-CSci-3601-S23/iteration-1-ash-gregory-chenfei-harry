@@ -91,15 +91,15 @@ public class ClientRequestControllerSpec {
     List<Document> testClients = new ArrayList<>();
     testClients.add(
         new Document()
-            .append("need_met", false)
-            .append("need_description", "Salsa")
-            .append("date_added", "2023-01-12T19:17:42Z"));
+            .append("needMet", false)
+            .append("needDescription", "Salsa")
+            .append("dateAdded", "2023-01-12T19:17:42Z"));
 
     testClients.add(
         new Document()
-            .append("need_met", true)
-            .append("need_description", "The food shelf doesn't have gluten free options.")
-            .append("date_added", "2023-01-12T19:17:45Z"));
+            .append("needMet", true)
+            .append("needDescription", "The food shelf doesn't have gluten free options.")
+            .append("dateAdded", "2023-01-12T19:17:45Z"));
 
     clientDocuments.insertMany(testClients);
     clientController = new ClientRequestController(db);

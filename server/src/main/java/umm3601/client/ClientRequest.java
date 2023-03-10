@@ -8,9 +8,9 @@ public class ClientRequest {
   @ObjectId @Id
 
   public String _id;
-  public boolean need_met;
-  public String need_description;
-  public String date_added;
+  public boolean needMet;
+  public String needDescription;
+  public String dateAdded;
 
   /*
    * Implement the equals method to only check the ids

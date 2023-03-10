@@ -7,13 +7,13 @@ import { ClientRequest } from './client';
 
 import { ClientService } from './client.service';
 
-describe('ClientService', () => {/* eslint @typescript-eslint/naming-convention: "off" */
+describe('ClientService', () => {
   const testRequests: ClientRequest[] = [
     {
       _id: '588935f5556f992bf8f37c01',
-      need_met: true,
-      need_description: 'The food shelf does meet my needs. But I wish they had more salsa',
-      date_added: '2023-01-12T19:17:42Z'
+      needMet: true,
+      needDescription: 'The food shelf does meet my needs. But I wish they had more salsa',
+      dateAdded: '2023-01-12T19:17:42Z'
     }];
 
   let service: ClientService;

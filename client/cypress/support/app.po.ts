@@ -22,7 +22,7 @@ export class AppPage {
     return cy.get(this.sideNav);
   }
 
-  getNavLink(navOption: 'Home' | 'Users'|'Requests') {
+  getNavLink(navOption: 'Home' | 'Users'|'Requests'|'Volunteer View'|'Client View') {
     return cy.contains(this.sideNavOption, `${navOption}`);
   }
 }

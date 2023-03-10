@@ -13,9 +13,9 @@ Items requested of donors are stored in the `requests` database. They are stored
   "count": 32,
   "price": 10.23,
   "priority": 2,
-  "date_added": "2023-02-28T19:17:04Z",
-  "date_updated": "2023-02-28T19:17:04Z",
-  "count_remaining": 2
+  "dateAdded": "2023-02-28T19:17:04Z",
+  "dateUpdated": "2023-02-28T19:17:04Z",
+  "countRemaining": 2
 },
 ```
 
@@ -70,4 +70,4 @@ The following restrictions are placed on the data provided:
 - `price` must be present and greater than zero
 - `priority` must be present and a positive integer
 
-Note that the `count_remaining` value in the request will be be initialized with the `count` provided. The `date_added` and `date_updated` values are both updated with the current time formatted as an ISO 8601 string.
+Note that the `countRemaining` value in the request will be be initialized with the `count` provided. The `dateAdded` and `dateUpdated` values are both updated with the current time formatted as an ISO 8601 string.

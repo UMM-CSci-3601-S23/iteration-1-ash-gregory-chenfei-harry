@@ -3,7 +3,7 @@ package umm3601.request;
 import org.mongojack.Id;
 import org.mongojack.ObjectId;
 
-@SuppressWarnings({"VisibilityModifier", "MemberName"})
+@SuppressWarnings({"VisibilityModifier"})
 public class Request {
   @ObjectId @Id
 
@@ -17,9 +17,9 @@ public class Request {
   public int count;
   public float price;
   public int priority;
-  public String date_added;
-  public String date_updated;
-  public int count_remaining;
+  public String dateAdded;
+  public String dateUpdated;
+  public int countRemaining;
 
   /*
    * Implement the equals method to only check the ids

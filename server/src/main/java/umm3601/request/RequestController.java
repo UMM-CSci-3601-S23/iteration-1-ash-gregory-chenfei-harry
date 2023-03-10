@@ -65,13 +65,13 @@ public class RequestController {
       .check(rq -> rq.priority > 0, "Request priority must be a positive integer")
       .get();
 
-    // The initial `count_remaining` will start at the count
-    request.count_remaining = request.count;
+    // The initial `countRemaining` will start at the count
+    request.countRemaining = request.count;
 
-    // The initial `date_added` and `date_updated` are set to the current time
+    // The initial `dateAdded` and `dateUpdated` are set to the current time
     // formatted as an ISO 8601 string
-    request.date_added = ZonedDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_INSTANT);
-    request.date_updated = request.date_added;
+    request.dateAdded = ZonedDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_INSTANT);
+    request.dateUpdated = request.dateAdded;
 
     // Insert the request into the database
     requestCollection.insertOne(request);

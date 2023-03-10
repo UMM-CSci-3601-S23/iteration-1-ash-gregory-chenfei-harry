@@ -1,4 +1,3 @@
-/* eslint @typescript-eslint/naming-convention: "off" */
 export interface Request {
   _id: string;
   name: string;
@@ -7,9 +6,9 @@ export interface Request {
   count: number;
   price: number;
   priority: number;
-  date_added: string;
-  date_updated: string;
-  count_remaining: number;
+  dateAdded: string;
+  dateUpdated: string;
+  countRemaining: number;
 }
 
 export type FoodCategory = 'fruits' | 'vegetables' | 'proteins' | 'grains' | 'dairy' |

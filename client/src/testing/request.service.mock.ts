@@ -13,7 +13,6 @@ import { RequestService } from 'src/app/requests/request.service';
 @Injectable({
   providedIn: AppComponent
 })
-/* eslint @typescript-eslint/naming-convention: 'off' */
 export class MockRequestService extends RequestService {
   static testRequests: Request[] = [
     {
@@ -24,9 +23,9 @@ export class MockRequestService extends RequestService {
       count: 32,
       price: 10.23,
       priority: 2,
-      date_added: '2023-02-28T19:17:04Z',
-      date_updated: '2023-02-28T19:17:04Z',
-      count_remaining: 2
+      dateAdded: '2023-02-28T19:17:04Z',
+      dateUpdated: '2023-02-28T19:17:04Z',
+      countRemaining: 2
     },
     {
       _id: '588935f5556f992bf8f37c02',
@@ -36,9 +35,9 @@ export class MockRequestService extends RequestService {
       count: 100,
       price: 9.12,
       priority: 8,
-      date_added: '2023-01-11T19:17:04Z',
-      date_updated: '2023-01-11T19:17:04Z',
-      count_remaining: 20}
+      dateAdded: '2023-01-11T19:17:04Z',
+      dateUpdated: '2023-01-11T19:17:04Z',
+      countRemaining: 20}
   ];
 
   constructor() {

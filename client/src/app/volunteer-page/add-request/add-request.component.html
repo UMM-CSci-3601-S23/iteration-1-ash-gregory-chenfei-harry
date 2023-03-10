@@ -1,4 +1,3 @@
-
 <form [formGroup]="addRequestForm" (ngSubmit)="submitForm();">
 
       <div class="flex-col">
@@ -70,7 +69,7 @@
         mat-button
         type="button"
         color="primary"
-
+        [disabled]="!addRequestForm.valid"
         type="submit"
         data-test="confirmAddRequestButton"
       >

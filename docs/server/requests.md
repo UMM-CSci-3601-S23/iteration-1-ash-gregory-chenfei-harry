@@ -36,7 +36,7 @@ Date added is the date the request was initially made, and date updated is the d
 
 Count remaining is also used for the potential to have "pledges" update the amount requested that appears to donors.
 
-These are represented as the `Requests` object on the server. The class can be found [here](../../server/src/main/java/umm3601/requests/Request.java).
+These are represented as the `Requests` object on the server. The class can be found [here](../../server/src/main/java/umm3601/request/Request.java).
 
 ## API Endpoints
 

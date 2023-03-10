@@ -22,6 +22,19 @@ describe('App', () => {
     page.getSidenav()
       .should('be.hidden');
 
+    page.getSidenavButton().click();
+      page.getNavLink('Volunteer View').click();
+      cy.url().should('match', /\/volunteer$/);
+      page.getSidenav()
+        .should('be.hidden');
+
+    page.getSidenavButton().click();
+      page.getNavLink('Client View').click();
+      cy.url().should('match', /\/client$/);
+      page.getSidenav()
+        .should('be.hidden');
+
+
     // Try to navigate to Home
     page.getSidenavButton().click();
     page.getNavLink('Home').click();

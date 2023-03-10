@@ -9,11 +9,17 @@ import { ClientRequest } from './client';
 })
 export class ClientService {
 
-  readonly requestUrl: string = `${environment.apiUrl}requests`;
+  readonly requestUrl: string = `${environment.apiUrl}clients`;
 
   constructor(public myHttpClient: HttpClient) { }
   addRequest(newRequest: Partial<ClientRequest>): Observable<string> {
     // Send post request to add a new request with the user data as the body.
     return this.myHttpClient.post<{id: string}>(this.requestUrl, newRequest).pipe(map(res => res.id));
+  }
+
+  getRequests(): Observable<ClientRequest[]> {
+    // Send the HTTP GET request with no parameters to get all requests.
+    // That will return the desired `Observable<Request[]>`.
+    return this.myHttpClient.get<ClientRequest[]>(this.requestUrl);
   }
 }

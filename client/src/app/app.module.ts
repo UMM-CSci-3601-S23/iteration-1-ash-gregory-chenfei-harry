@@ -25,13 +25,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
 
-import { AddUserComponent } from './users/add-user.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
-import { UserCardComponent } from './users/user-card.component';
-import { UserListComponent } from './users/user-list.component';
-import { UserProfileComponent } from './users/user-profile.component';
 import { RequestCardComponent } from './requests/request-card.component';
 import { RequestListComponent } from './requests/request-list.component';
 import { RequestProfileComponent } from './requests/request-profile.component';
@@ -62,10 +58,6 @@ const MATERIAL_MODULES: any[] = [
   declarations: [
     AppComponent,
     HomeComponent,
-    UserListComponent,
-    UserCardComponent,
-    UserProfileComponent,
-    AddUserComponent,
     RequestCardComponent,
     RequestListComponent,
     RequestProfileComponent,

@@ -7,7 +7,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MockUserService } from 'src/testing/user.service.mock';
 import { AddRequestComponent } from './add-request.component';
 import { RequestService } from 'src/app/requests/request.service';
 import { MockRequestService } from 'src/testing/request.service.mock';
@@ -77,4 +76,19 @@ describe('AddRequestComponent', () => {
       expect(component.getErrorMessage('priority')).toBeTruthy();
     });
   });
+
+  describe('Proper bad error message', () => {
+    let priorityControl: AbstractControl;
+
+    beforeEach(() => {
+      priorityControl = component.addRequestForm.controls.priority;
+    });
+
+    it('should allow positive values', () => {
+      priorityControl.setValue(1.0);
+      expect(priorityControl.valid).toBeTruthy();
+      expect(component.getErrorMessage('priority')).toBe('Unknown error');
+    });
+  });
 });
+

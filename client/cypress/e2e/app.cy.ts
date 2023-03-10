@@ -17,12 +17,6 @@ describe('App', () => {
       .should('be.visible');
 
     page.getSidenavButton().click();
-    page.getNavLink('Users').click();
-    cy.url().should('match', /\/users$/);
-    page.getSidenav()
-      .should('be.hidden');
-
-    page.getSidenavButton().click();
     page.getNavLink('Requests').click();
     cy.url().should('match', /\/requests$/);
     page.getSidenav()

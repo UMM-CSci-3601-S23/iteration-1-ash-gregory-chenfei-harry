@@ -1,3 +1,4 @@
+/*
 import { User } from 'src/app/users/user';
 import { AddUserPage } from '../support/add-user.po';
 
@@ -137,3 +138,4 @@ describe('Add user', () => {
   });
 
 });
+*/

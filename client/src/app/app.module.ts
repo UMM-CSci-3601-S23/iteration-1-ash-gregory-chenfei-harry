@@ -21,7 +21,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatStepperModule } from '@angular/material/stepper';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
@@ -38,7 +37,6 @@ import { RequestListComponent } from './requests/request-list.component';
 import { RequestProfileComponent } from './requests/request-profile.component';
 import { VolunteerPageComponent } from './volunteer-page/volunteer-page.component';
 import { AddRequestComponent } from './volunteer-page/add-request/add-request.component';
-import { ClientComponent } from './client/client.component';
 
 const MATERIAL_MODULES: any[] = [
   MatButtonModule,
@@ -55,7 +53,6 @@ const MATERIAL_MODULES: any[] = [
   MatSidenavModule,
   MatSelectModule,
   MatSnackBarModule,
-  MatStepperModule,
   MatToolbarModule,
   MatTooltipModule,
   BrowserAnimationsModule,
@@ -74,7 +71,6 @@ const MATERIAL_MODULES: any[] = [
     RequestProfileComponent,
     VolunteerPageComponent,
     AddRequestComponent,
-    ClientComponent,
   ],
   imports: [
     BrowserModule,

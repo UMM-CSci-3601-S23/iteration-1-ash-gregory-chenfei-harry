@@ -13,8 +13,7 @@ import org.bson.UuidRepresentation;
 import io.javalin.Javalin;
 import io.javalin.plugin.bundled.RouteOverviewPlugin;
 import io.javalin.http.InternalServerErrorResponse;
-import umm3601.client.ClientRequestController;
-import umm3601.request.RequestController;
+import umm3601.requests.RequestController;
 import umm3601.user.UserController;
 
 public class Server {
@@ -45,7 +44,6 @@ public class Server {
     // Initialize dependencies
     UserController userController = new UserController(database);
     RequestController requestController = new RequestController(database);
-    ClientRequestController clientRequestController = new ClientRequestController(database);
 
     Javalin server = Javalin.create(config ->
       config.plugins.register(new RouteOverviewPlugin("/api"))
@@ -84,13 +82,6 @@ public class Server {
     // Add new request with the request info being in the JSON
     // body of the HTTP request
     server.post("/api/requests", requestController::addNewRequest);
-
-    // Add new client request with info being in the JSON
-    // body of the HTTP request.
-    server.post("/api/clients", clientRequestController::addNewClientRequest);
-
-    // List client all requests
-    server.get("/api/clients", clientRequestController::getClientRequests);
 
     // This catches any uncaught exceptions thrown in the server
     // code and turns them into a 500 response ("Internal Server

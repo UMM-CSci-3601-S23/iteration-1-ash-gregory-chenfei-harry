@@ -50,31 +50,15 @@ describe('VolunteerPageComponent', () => {
     TestBed.configureTestingModule({
       imports: [COMMON_IMPORTS],
       declarations: [],
-      // providers:    [ UserService ]  // NO! Don't provide the real service!
-      // Provide a test-double instead
       providers: [{ provide: ClientService, useValue: new MockClientService() }]
     });
   });
 
-  // This constructs the `userList` (declared
-  // above) that will be used throughout the tests.
   beforeEach(waitForAsync(() => {
-  // Compile all the components in the test bed
-  // so that everything's ready to go.
     TestBed.compileComponents().then(() => {
-      /* Create a fixture of the UserListComponent. That
-       * allows us to get an instance of the component
-       * (userList, below) that we can control in
-       * the tests.
-       */
       fixture = TestBed.createComponent(VolunteerPageComponent);
       component = fixture.componentInstance;
-      /* Tells Angular to sync the data bindings between
-       * the model and the DOM. This ensures, e.g., that the
-       * `userList` component actually requests the list
-       * of users from the `MockUserService` so that it's
-       * up to date before we start running tests on it.
-       */
+
       fixture.detectChanges();
     });
   }));
@@ -83,8 +67,8 @@ describe('VolunteerPageComponent', () => {
   });
 });
 
-describe('Misbehaving User List', () => {
-  let userList: VolunteerPageComponent;
+describe('Misbehaving Client Request List', () => {
+  let component: VolunteerPageComponent;
   let fixture: ComponentFixture<VolunteerPageComponent>;
 
   let serviceStub: {
@@ -94,34 +78,27 @@ describe('Misbehaving User List', () => {
   beforeEach(() => {
     serviceStub = {
       getRequests: () => new Observable(observer => {
-        observer.error('getUsers() Observer generates an error');
+        observer.error('getRequests() Observer generates an error');
       })
     };
 
     TestBed.configureTestingModule({
       imports: [COMMON_IMPORTS],
       declarations: [VolunteerPageComponent],
-      // providers:    [ UserService ]  // NO! Don't provide the real service!
-      // Provide a test-double instead
       providers: [{ provide: ClientService, useValue: serviceStub }]
     });
   });
 
-  // Construct the `userList` used for the testing in the `it` statement
-  // below.
   beforeEach(waitForAsync(() => {
     TestBed.compileComponents().then(() => {
       fixture = TestBed.createComponent(VolunteerPageComponent);
-      userList = fixture.componentInstance;
+      component = fixture.componentInstance;
       fixture.detectChanges();
     });
   }));
 
-  it('generates an error if we don\'t set up a UserListService', () => {
-    // Since calling either getUsers() or getUsersFiltered() return
-    // Observables that then throw exceptions, we don't expect the component
-    // to be able to get a list of users, and serverFilteredUsers should
-    // be undefined.
-    expect(userList.requests).toBeUndefined();
+  it('generates an error if we don\'t set up a ClientService', () => {
+
+    expect(component.requests).toBeUndefined();
   });
 });

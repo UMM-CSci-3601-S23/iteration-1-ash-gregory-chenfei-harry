@@ -2,16 +2,16 @@
   {"_id": {
     "$oid": "588935f5556f992bf8f37c03"
   },
-"need_met": true,
-"need_description": "The food shelf does meet my needs. But I wish they had more salsa",
-"date_added": "2023-01-12T19:17:42Z"
+"needMet": true,
+"needDescription": "The food shelf does meet my needs. But I wish they had more salsa",
+"dateAdded": "2023-01-12T19:17:42Z"
   },
 
   {"_id": {
     "$oid": "588935f5556f992bf8f37c04"
   },
-"need_met": false,
-"need_description": "Gluten free pasta",
-"date_added": "2023-01-12T19:17:45Z"
+"needMet": false,
+"needDescription": "Gluten free pasta",
+"dateAdded": "2023-01-12T19:17:45Z"
   }
 ]

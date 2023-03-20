@@ -12,23 +12,19 @@ import { ClientService } from './client.service';
 })
 export class ClientComponent {
   addClientRequestForm = new FormGroup({
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    need_met: new FormControl<boolean>(null, Validators.compose([Validators.required, Validators.minLength(1)])),
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    need_description: new FormControl('', Validators.compose([Validators.required, Validators.minLength(1)])),
+    needMet: new FormControl<boolean>(null, Validators.compose([Validators.required, Validators.minLength(1)])),
+    needDescription: new FormControl('', Validators.compose([Validators.required, Validators.minLength(1)])),
   });
 
   readonly addRequestValidationMessages = {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    need_met: [
-      {type: 'required', message: 'need_met is required'},
-      {type: 'minlength', message: 'need_met must be nonempty'},
+    needMet: [
+      {type: 'required', message: 'needMet is required'},
+      {type: 'minlength', message: 'needMet must be nonempty'},
     ],
 
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    need_description: [
-      {type: 'required', message: 'need_description is required'},
-      {type: 'minlength', message: 'need_description must be nonempty'},
+    needDescription: [
+      {type: 'required', message: 'needDescription is required'},
+      {type: 'minlength', message: 'needDescription must be nonempty'},
     ],
   };
 
@@ -61,7 +57,7 @@ export class ClientComponent {
       },
       complete: () => {
         this.snackBar.open(
-          `Request for ${this.addClientRequestForm.value.need_description} successfully added`,
+          `Request for ${this.addClientRequestForm.value.needDescription} successfully added`,
           'OK',
           { duration: 5000 }
         );

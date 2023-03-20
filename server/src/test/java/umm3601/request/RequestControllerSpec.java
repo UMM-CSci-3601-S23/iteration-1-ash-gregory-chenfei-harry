@@ -112,9 +112,9 @@ public class RequestControllerSpec {
             .append("count", 42)
             .append("price", 2.50)
             .append("priority", 2)
-            .append("date_added", "2023-02-28T19:17:04Z")
-            .append("date_updated", "2023-02-28T19:17:04Z")
-            .append("count_remaining", 2));
+            .append("dateAdded", "2023-02-28T19:17:04Z")
+            .append("dateUpdated", "2023-02-28T19:17:04Z")
+            .append("countRemaining", 2));
 
     testRequests.add(
         new Document()
@@ -124,9 +124,9 @@ public class RequestControllerSpec {
             .append("count", 5)
             .append("price", 5.25)
             .append("priority", 8)
-            .append("date_added", "2023-01-12T19:17:42Z")
-            .append("date_updated", "2023-01-23T19:17:04Z")
-            .append("count_remaining", 4));
+            .append("dateAdded", "2023-01-12T19:17:42Z")
+            .append("dateUpdated", "2023-01-23T19:17:04Z")
+            .append("countRemaining", 4));
 
     requestDocuments.insertMany(testRequests);
     requestController = new RequestController(db);
@@ -184,9 +184,9 @@ public class RequestControllerSpec {
     assertEquals("grains", addedRequest.get("category"));
     assertEquals("boxes", addedRequest.get("unit"));
     assertEquals(6, addedRequest.get("count"));
-    assertEquals(6, addedRequest.get("count_remaining"));
-    assertNotNull(addedRequest.get("date_added"));
-    assertNotNull(addedRequest.get("date_updated"));
+    assertEquals(6, addedRequest.get("countRemaining"));
+    assertNotNull(addedRequest.get("dateAdded"));
+    assertNotNull(addedRequest.get("dateUpdated"));
   }
 
   @Test
